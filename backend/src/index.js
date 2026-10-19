@@ -25,7 +25,7 @@ async function startServer()
 
 // Middlewares
 app.use(express.json());
-app.use(cors(FRONTEND_URL));
+app.use(cors({oigin:FRONTEND_URL, credentials: true}));
 app.use(clerkMiddleware());
 
 app.get("/health", (req,res) => {
