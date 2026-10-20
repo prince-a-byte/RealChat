@@ -5,6 +5,7 @@ import {clerkMiddleware} from "@clerk/express"
 import cors from "express"
 import fs from "fs";
 import path from 'path'
+import job from "./lib/cron.js";
 
 
 const app = express();
@@ -24,6 +25,11 @@ async function startServer()
         app.listen(PORT, ()=>{
             console.log(`Server is running on PORT: ${PORT}`);
         })
+
+        if(process.env.NODE_ENV)
+        {
+           job.start(); 
+        }
     } catch (error) {
         console.log(error);
         process.exit(1);
